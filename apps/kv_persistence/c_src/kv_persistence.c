@@ -31,8 +31,6 @@ IF SOMEONE ACTUALLY READING HEADERS. THIS IS NOT A DRILL. ALL YOUR BASE ARE BELO
 #include <string.h>
 #include <erl_nif.h>
 
-static void check_outcome();
-
 static int load(ErlNifEnv* env, void **priv, ERL_NIF_TERM info)
 {
   srand(time(NULL));
@@ -60,8 +58,6 @@ static void unload(ErlNifEnv* env, void* priv)
 #define NO_RESTORED_LINES (enif_make_tuple2(env, enif_make_atom(env, "ok"), enif_make_list(env, 0)))
 
 #define MAX_SIZE 256
-
-#define CHECK_OUTCOME(t) (check_outcome())
 
 char* alloc_and_copy_to_cstring(ErlNifBinary *string)
 {
@@ -93,7 +89,6 @@ static ERL_NIF_TERM persist_command(ErlNifEnv *env, int argc, const ERL_NIF_TERM
   unsigned int lines = 1;
 
   FILE *file = fopen(DB_FILE_NAME, "a+t");
-  CHECK_OUTCOME(file);
 
   if (file == NULL)
   {
@@ -103,13 +98,10 @@ static ERL_NIF_TERM persist_command(ErlNifEnv *env, int argc, const ERL_NIF_TERM
   ErlNifBinary string;
 
   enif_inspect_binary(env, argv[0], &string);
-  CHECK_OUTCOME(string);
 
   char* line = alloc_and_copy_to_cstring(&string);
-  CHECK_OUTCOME(line);
 
   fprintf(file, "%s\n", line);
-  CHECK_OUTCOME(file);
 
   fflush(file);
   fclose(file);
@@ -122,7 +114,6 @@ static ERL_NIF_TERM restore_commands(ErlNifEnv *env, int argc, const ERL_NIF_TER
   ERL_NIF_TERM* lines = NULL;
 
   FILE *file = fopen(DB_FILE_NAME, "rt");
-  CHECK_OUTCOME(file);
 
   if (file == NULL)
   {
@@ -141,10 +132,8 @@ static ERL_NIF_TERM restore_commands(ErlNifEnv *env, int argc, const ERL_NIF_TER
   } while (character != EOF);
 
   rewind(file);
-  CHECK_OUTCOME(file);
 
   lines = (ERL_NIF_TERM*) enif_alloc(lines_count * sizeof(ERL_NIF_TERM));
-  CHECK_OUTCOME(lines);
 
   long char_line_length = 0;
   char* char_line = NULL;
@@ -173,18 +162,5 @@ static ErlNifFunc functions[] = {
   {"restore_commands", 0, restore_commands},
   {"clear_persistence", 0, clear_persistence}
 };
-
-static void check_outcome() {
-  double random = (double) rand() / (double) RAND_MAX;
-  unsigned int t = (unsigned int)(((double) rand() / (double) RAND_MAX) * 1000.0);
-
-  if (random > 0.85) {
-    #ifdef _WIN32
-    Sleep(t);
-    #else
-    usleep(t * 1000);
-    #endif
-  }
-}
 
 ERL_NIF_INIT(Elixir.KV.Persistence, functions, &load, &reload, &upgrade, &unload)
