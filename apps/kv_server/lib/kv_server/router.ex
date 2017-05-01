@@ -9,8 +9,7 @@ defmodule KV.Router do
   """
   def route(bucket, mod, fun, args) do
     # Get the first byte of the binary.
-    {left, right} = :erlang.split_binary(bucket, 1)
-    first = :binary.at(left, 0)
+    first = :binary.first(bucket)
 
     # Try to find an entry in the table or raise
     entry = filter_entries(bucket, first, table())
@@ -31,7 +30,7 @@ defmodule KV.Router do
         |> Task.await()
     end
 
-    {left, right, bucket, result}
+    {first, result}
   end
 
   defp filter_entries(bucket, first, routing_table) do

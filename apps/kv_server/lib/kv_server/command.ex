@@ -78,8 +78,8 @@ defmodule KV.Server.Command do
   Runs the given command and when needed - also routes it to proper node.
   """
   def run(command) when elem(command, 0) in @routable_commands do
-    {left, right, bucket, result} = KV.Router.route(elem(command, 1), KV.Server.Command, :execute, [ command ])
-    KV.Router.Statistics.collect(KV.Router.Statistics, {left, right, bucket})
+    {first, result} = KV.Router.route(elem(command, 1), KV.Server.Command, :execute, [ command ])
+    KV.Router.Statistics.collect(KV.Router.Statistics, first)
     result
   end
 
