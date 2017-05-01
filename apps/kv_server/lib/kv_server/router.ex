@@ -1,7 +1,7 @@
 defmodule KV.Router do
   require Logger
 
-  @default_routing_table [ {?A..?z, :this} ]
+  @default_routing_table [ {1..255, :this} ]
 
   @doc """
   Dispatch the given `mod`, `fun`, `args` request
