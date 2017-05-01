@@ -25,7 +25,7 @@ defmodule KV.Persistence do
     persist_command(line)
   end
 
-  def store({:delete, bucket}) do
+  def store({:del, bucket}) do
     line = "DELETE #{bucket}"
     persist_command(line)
   end
@@ -35,7 +35,7 @@ defmodule KV.Persistence do
     persist_command(line)
   end
 
-  def store({:delete, bucket, key}) do
+  def store({:del, bucket, key}) do
     line = "DELETE #{bucket} #{key}"
     persist_command(line)
   end
