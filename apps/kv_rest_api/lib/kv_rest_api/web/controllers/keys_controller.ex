@@ -24,10 +24,16 @@ defmodule KV.RestAPI.Web.KeysController do
   end
 
   def create(conn, %{"bucket" => bucket, "key" => key, "value" => value, "ttl" => ttl}) do
-    with :ok <- KV.RestAPI.Command.Server.execute(:create, [ bucket, key, value, ttl ]) do
-      conn
-      |> put_status(:created)
-      |> json(%{"status" => "Key #{key} in bucket #{bucket} created with TTL: #{ttl}."})
+    case KV.RestAPI.Command.Server.execute(:create, [ bucket, key, value, ttl ]) do
+      :error ->
+        conn
+        |> put_status(500)
+        |> render(KV.RestAPI.Web.ErrorView, "500.json")
+
+      :ok ->
+        conn
+        |> put_status(:created)
+        |> json(%{"status" => "Key #{key} in bucket #{bucket} created with TTL: #{ttl}."})
     end
   end
 

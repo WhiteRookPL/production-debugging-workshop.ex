@@ -23,7 +23,7 @@ defmodule KV.Server.Command do
       {:ok, {:put, "shopping", "milk", "1"}}
 
       iex> KV.Server.Command.parse "PUTX shopping milk 1 100\r\n"
-      {:ok, {:putx, "shopping", "milk", "1", 100}}
+      {:ok, {:putx, "shopping", "milk", "1", "100"}}
 
       iex> KV.Server.Command.parse "DELETE shopping eggs\r\n"
       {:ok, {:del, "shopping", "eggs"}}
@@ -63,7 +63,7 @@ defmodule KV.Server.Command do
       ["KEYS", bucket] -> {:ok, {:keys, bucket}}
       ["GET", bucket, key] -> {:ok, {:get, bucket, key}}
       ["PUT", bucket, key, value] -> {:ok, {:put, bucket, key, value}}
-      ["PUTX", bucket, key, value, ttl] -> {:ok, {:putx, bucket, key, value, String.to_integer(ttl)}}
+      ["PUTX", bucket, key, value, ttl] -> {:ok, {:putx, bucket, key, value, ttl}}
       ["DELETE", bucket, key] -> {:ok, {:del, bucket, key}}
       ["SUM", bucket] -> {:ok, {:sum, bucket}}
       ["AVG", bucket] -> {:ok, {:avg, bucket}}
@@ -138,10 +138,16 @@ defmodule KV.Server.Command do
     end
   end
 
-  defp invoke({:putx, bucket, key, value, ttl}) do
+  defp invoke({:putx, bucket, key, value, stringified_ttl}) do
     lookup bucket, fn pid ->
-      KV.Bucket.putx(pid, key, Base.decode64!(value, ignore: :whitespace), ttl)
-      {:ok, "OK\r\n"}
+      case Integer.parse(stringified_ttl, 10) do
+        {ttl, _rest} ->
+          KV.Bucket.putx(pid, key, Base.decode64!(value, ignore: :whitespace), ttl)
+          {:ok, "OK\r\n"}
+
+        :error ->
+          {:ok, "INVALID TTL\r\n"}
+      end
     end
   end
 
