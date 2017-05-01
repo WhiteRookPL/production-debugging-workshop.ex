@@ -162,6 +162,9 @@ defmodule KV.RestAPI.Web.Client do
 
     kv_server_send(socket, [command, ?\r, ?\n])
 
-    String.trim(kv_server_recv(socket))
+    response = String.trim(kv_server_recv(socket))
+
+    :gen_tcp.close(socket)
+    response
   end
 end
