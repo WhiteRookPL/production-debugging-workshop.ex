@@ -22,11 +22,17 @@ defmodule KV.RestAPI.Web.MapReduceController do
   end
 
   def word_count(conn, %{"bucket" => bucket, "key" => key}) do
-    with id <- KV.RestAPI.Command.Server.execute(:word_count, [ bucket, key ]) do
-      conn
-      |> put_status(:ok)
-      |> put_resp_header("location", map_reduce_url(conn, :result, id))
-      |> json(%{"job" => id})
+    case KV.RestAPI.Command.Server.execute(:word_count, [ bucket, key ]) do
+      :not_found ->
+        conn
+        |> put_status(:not_found)
+        |> json(%{"status" => "Key #{key} not found in bucket #{bucket}."})
+
+      id ->
+        conn
+        |> put_status(:ok)
+        |> put_resp_header("location", map_reduce_url(conn, :result, id))
+        |> json(%{"job" => id})
     end
   end
 

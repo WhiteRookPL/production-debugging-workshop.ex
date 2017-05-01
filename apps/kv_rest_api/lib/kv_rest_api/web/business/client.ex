@@ -118,7 +118,10 @@ defmodule KV.RestAPI.Web.Client do
       command("WORDCOUNT #{bucket} #{key}")
       |> String.split("\r\n")
 
-    id
+    case id do
+      "NOT_FOUND" -> :not_found
+      _           -> id
+    end
   end
 
   @doc """
