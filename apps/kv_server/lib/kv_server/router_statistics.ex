@@ -34,6 +34,8 @@ defmodule KV.Router.Statistics do
 
   defp restore(false), do: :ok
   defp restore(true) do
+    start_time = System.system_time()
+
     {:ok, commands} = KV.Persistence.restore()
 
     Enum.each(commands, fn(command) ->
@@ -42,6 +44,7 @@ defmodule KV.Router.Statistics do
       KV.Router.route(elem(parsed, 1), KV.Server.Command, :execute_without_persistence, [ parsed ])
     end)
 
-    Logger.info "Restored #{length(commands)} commands from DB."
+    end_time = System.system_time()
+    Logger.info "Restored #{length(commands)} commands from DB (it took #{System.convert_time_unit(end_time - start_time, :native, :milliseconds)} ms)."
   end
 end
