@@ -15,8 +15,7 @@ defmodule KV.Router do
     # Try to find an entry in the table or raise
     entry = filter_entries(bucket, first, table())
 
-    bucket_atom = String.to_atom(bucket)
-    Logger.info("Routing operations for '#{bucket_atom}' to '#{inspect elem(entry, 1)}'.")
+    Logger.info("Routing operations for '#{bucket}' to '#{inspect elem(entry, 1)}'.")
 
     # If the entry node is the current node.
     result = case elem(entry, 1) do

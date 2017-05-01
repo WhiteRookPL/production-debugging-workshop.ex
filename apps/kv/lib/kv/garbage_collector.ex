@@ -49,7 +49,7 @@ defmodule KV.GarbageCollector do
     :proc_lib.init_ack(parent, {:ok, self()})
     Process.register(self(), name)
 
-    loop(parent, opts, [])
+    loop(parent, opts, %{})
   end
 
   # Private API.
@@ -63,14 +63,14 @@ defmodule KV.GarbageCollector do
 
         new_opts = :sys.handle_debug(modified_opts, &write_debug/3, __MODULE__, {:out, :expired, bucket, key})
 
-        loop(parent, new_opts, Keyword.put(state, String.to_atom(key), ttl))
+        loop(parent, new_opts, Map.put(state, key, ttl))
 
       {:expired, bucket, key} ->
         new_opts = :sys.handle_debug(opts, &write_debug/3, __MODULE__, {:in, :expired, bucket, key})
 
         KV.Bucket.delete(bucket, key)
 
-        loop(parent, new_opts, Keyword.delete(state, String.to_atom(key)))
+        loop(parent, new_opts, Map.delete(state, key))
 
       {:system, from, request} ->
         :sys.handle_system_msg(request, from, parent, __MODULE__, opts, state)
