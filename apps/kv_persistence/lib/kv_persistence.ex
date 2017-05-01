@@ -65,7 +65,7 @@ defmodule KV.Persistence do
   def restore() do
     {:ok, lines} = restore_commands()
 
-    result = lines |> Enum.map(&to_string/1)
+    result = lines |> Enum.map(&to_string/1) |> Enum.map(&String.trim/1)
     {:ok, result}
   end
 

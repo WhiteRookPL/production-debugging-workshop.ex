@@ -139,15 +139,11 @@ static ERL_NIF_TERM restore_commands(ErlNifEnv *env, int argc, const ERL_NIF_TER
 
   long char_line_length = 0;
   char* char_line = NULL;
-  char line[256];
 
   for(int i = 0; i < lines_count; ++i) {
     long result = getline(&char_line, &char_line_length, file);
 
-    memcpy(line, char_line, strlen(char_line) - 1);
-    line[strlen(char_line) - 1] = 0;
-
-    lines[i] = enif_make_string(env, line, ERL_NIF_LATIN1);
+    lines[i] = enif_make_string(env, char_line, ERL_NIF_LATIN1);
 
     if (result == -1) {
       break;
