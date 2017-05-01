@@ -46,6 +46,6 @@ defmodule KV.RestAPI.Command.Server do
     transform(commands, [])
   end
 
-  defp transform([], acc), do: acc
-  defp transform([ {command, args} | _ ] = commands, acc), do: transform(commands, acc ++ [ "#{command} #{args}" ])
+  defp transform([], acc), do: Enum.reverse(acc)
+  defp transform([ {command, args} | rest ], acc), do: transform(rest, [ "#{command} #{args}" | acc ])
 end
