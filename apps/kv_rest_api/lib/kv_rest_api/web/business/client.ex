@@ -9,7 +9,7 @@ defmodule KV.RestAPI.Web.Client do
 
     case response do
       [ "OK" ] -> []
-      [ buckets | _tail ] -> String.split(buckets, ",")
+      [ buckets | _tail ] -> String.split(buckets, ",") |> Enum.map(&decode/1)
     end
   end
 
@@ -84,7 +84,7 @@ defmodule KV.RestAPI.Web.Client do
 
     case response do
       [ "OK" ] -> []
-      [ keys | _tail ] -> String.split(keys, ",")
+      [ keys | _tail ] -> String.split(keys, ",") |> Enum.map(&decode/1)
     end
   end
 
@@ -138,6 +138,10 @@ defmodule KV.RestAPI.Web.Client do
   end
 
   # Private API.
+
+  defp decode(name) do
+    String.replace(name, "%2C", ",")
+  end
 
   defp kv_server_open() do
     {:ok, socket} = :gen_tcp.connect('127.0.0.1', 4040, [:binary, active: false])

@@ -58,16 +58,16 @@ defmodule KV.Server.Command do
   """
   def parse(line) do
     case String.split(line) do
-      ["CREATE", bucket] -> {:ok, {:create, bucket}}
-      ["DELETE", bucket] -> {:ok, {:del, bucket}}
-      ["KEYS", bucket] -> {:ok, {:keys, bucket}}
-      ["GET", bucket, key] -> {:ok, {:get, bucket, key}}
-      ["PUT", bucket, key, value] -> {:ok, {:put, bucket, key, value}}
-      ["PUTX", bucket, key, value, ttl] -> {:ok, {:putx, bucket, key, value, ttl}}
-      ["DELETE", bucket, key] -> {:ok, {:del, bucket, key}}
-      ["SUM", bucket] -> {:ok, {:sum, bucket}}
-      ["AVG", bucket] -> {:ok, {:avg, bucket}}
-      ["WORDCOUNT", bucket, key] -> {:ok, {:word_count, bucket, key}}
+      ["CREATE", bucket] -> {:ok, {:create, encode(bucket)}}
+      ["DELETE", bucket] -> {:ok, {:del, encode(bucket)}}
+      ["KEYS", bucket] -> {:ok, {:keys, encode(bucket)}}
+      ["GET", bucket, key] -> {:ok, {:get, encode(bucket), encode(key)}}
+      ["PUT", bucket, key, value] -> {:ok, {:put, encode(bucket), encode(key), value}}
+      ["PUTX", bucket, key, value, ttl] -> {:ok, {:putx, encode(bucket), encode(key), value, ttl}}
+      ["DELETE", bucket, key] -> {:ok, {:del, encode(bucket), encode(key)}}
+      ["SUM", bucket] -> {:ok, {:sum, encode(bucket)}}
+      ["AVG", bucket] -> {:ok, {:avg, encode(bucket)}}
+      ["WORDCOUNT", bucket, key] -> {:ok, {:word_count, encode(bucket), encode(key)}}
       ["RESULT", id] -> {:ok, {:result, id}}
       ["BUCKETS"] -> {:ok, :buckets}
       _ -> {:error, :unknown_command}
@@ -209,6 +209,10 @@ defmodule KV.Server.Command do
   end
 
   # Private API.
+
+  defp encode(name) do
+    String.replace(name, ",", "%2C")
+  end
 
   defp do_when_persistence_enabled(action) do
     do_when_persistence_enabled(Application.get_env(:kv_server, :persistence_enabled), action)
