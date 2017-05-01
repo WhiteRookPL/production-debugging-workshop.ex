@@ -11,6 +11,7 @@ defmodule KV.MapReduce.WordCounter do
         KV.Bucket.get_stream(bucket, key)
         |> Flow.from_enumerable(window: per_line)
         |> Flow.flat_map(&String.split(&1, " "))
+        |> Flow.partition()
         |> Flow.reduce(fn() -> %{} end, &update_word_count/2)
         |> Enum.into(%{})
 
