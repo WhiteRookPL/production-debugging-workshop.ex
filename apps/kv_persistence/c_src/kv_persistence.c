@@ -154,6 +154,9 @@ static ERL_NIF_TERM restore_commands(ErlNifEnv *env, int argc, const ERL_NIF_TER
     }
   }
 
+  fflush(file);
+  fclose(file);
+
   free(char_line);
 
   return enif_make_tuple2(env, enif_make_atom(env, "ok"), enif_make_list_from_array(env, lines, lines_count));
