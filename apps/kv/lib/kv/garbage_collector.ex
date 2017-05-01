@@ -75,6 +75,9 @@ defmodule KV.GarbageCollector do
       {:system, from, request} ->
         :sys.handle_system_msg(request, from, parent, __MODULE__, opts, state)
         loop(parent, opts, state)
+
+      _ ->
+        loop(parent, opts, state)
     end
   end
 end
