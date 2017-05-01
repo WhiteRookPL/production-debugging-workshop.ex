@@ -22,6 +22,11 @@ defmodule KV.RestAPI.Web.BucketsController do
       conn
       |> put_status(:no_content)
       |> json(%{"status" => "Bucket #{bucket} deleted."})
+    else
+      :not_found ->
+        conn
+        |> put_status(:not_found)
+        |> json(%{"status" => "Bucket #{bucket} not found."})
     end
   end
 end

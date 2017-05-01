@@ -62,7 +62,7 @@ defmodule KV.RestAPI.Web.Client do
   def delete(bucket) do
     case command("DELETE #{bucket}") do
       "OK" -> :ok
-      _ -> :error
+      "NOT_FOUND" -> :not_found
     end
   end
 

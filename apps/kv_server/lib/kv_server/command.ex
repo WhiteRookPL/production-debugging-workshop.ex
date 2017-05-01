@@ -108,8 +108,10 @@ defmodule KV.Server.Command do
   end
 
   defp invoke({:del, bucket}) do
-    KV.Registry.delete(KV.Registry, bucket)
-    {:ok, "OK\r\n"}
+    case KV.Registry.delete(KV.Registry, bucket) do
+      :bucket_deleted -> {:ok, "OK\r\n"}
+      :no_such_bucket -> {:ok, "NOT_FOUND\r\n"}
+    end
   end
 
   defp invoke({:keys, bucket}) do
