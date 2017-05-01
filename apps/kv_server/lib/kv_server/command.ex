@@ -166,7 +166,11 @@ defmodule KV.Server.Command do
 
   defp invoke({:word_count, bucket, key}) do
     lookup bucket, fn pid ->
-      {:ok, id} = KV.MapReduce.Scheduler.new_word_count_job(KV.MapReduce.Scheduler, pid, key)
+      id = case KV.MapReduce.Scheduler.new_word_count_job(KV.MapReduce.Scheduler, pid, key) do
+        {:ok, id} -> id
+        :error    -> "NOT_FOUND"
+      end
+
       {:ok, "#{id}\r\nOK\r\n"}
     end
   end
