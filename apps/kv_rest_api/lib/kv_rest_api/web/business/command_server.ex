@@ -32,7 +32,7 @@ defmodule KV.RestAPI.Command.Server do
 
   def handle_call({:command, command, args}, _from, state) do
     result = apply(KV.RestAPI.Web.Client, command, args)
-    {:reply, result, state ++ [ {command, args} ]}
+    {:reply, result, state ++ [ command ]}
   end
 
   def handle_call(:history, _from, state) do
@@ -47,5 +47,5 @@ defmodule KV.RestAPI.Command.Server do
   end
 
   defp transform([], acc), do: Enum.reverse(acc)
-  defp transform([ {command, args} | rest ], acc), do: transform(rest, [ "#{command} #{args}" | acc ])
+  defp transform([ command | rest ], acc), do: transform(rest, [ "#{command}" | acc ])
 end
