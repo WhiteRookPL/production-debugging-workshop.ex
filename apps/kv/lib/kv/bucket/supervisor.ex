@@ -3,7 +3,6 @@ defmodule KV.Bucket.Supervisor do
 
   # A simple module attribute that stores the supervisor name
   @name KV.Bucket.Supervisor
-  @env Mix.env
 
   def start_link() do
     Supervisor.start_link(__MODULE__, :ok, name: @name)
@@ -15,12 +14,9 @@ defmodule KV.Bucket.Supervisor do
 
   def init(:ok) do
     children = [
-      worker(KV.Bucket, [], restart: restart_strategy(@env))
+      worker(KV.Bucket, [], restart: :permanent)
     ]
 
-    supervise(children, strategy: :simple_one_for_one, max_restarts: 1, max_seconds: 1)
+    supervise(children, strategy: :simple_one_for_one, max_restarts: 10, max_seconds: 1)
   end
-
-  defp restart_strategy(:prod), do: :permanent
-  defp restart_strategy(_), do: :transient
 end
