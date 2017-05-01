@@ -64,6 +64,7 @@ defmodule KV.Registry do
   def handle_call({:create, name}, _from, {names, refs}) do
     case lookup(names, name) do
       {:ok, pid} ->
+        :timer.call(300)
         {:reply, pid, {names, refs}}
 
       :error ->
