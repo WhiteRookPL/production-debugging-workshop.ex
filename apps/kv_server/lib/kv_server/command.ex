@@ -38,7 +38,7 @@ defmodule KV.Server.Command do
       {:ok, {:word_count, "shopping", "milk"}}
 
       iex> KV.Server.Command.parse "RESULT 1\r\n"
-      {:ok, {:result, 1}}
+      {:ok, {:result, "1"}}
 
       iex> KV.Server.Command.parse "BUCKETS\r\n"
       {:ok, :buckets}
@@ -68,7 +68,7 @@ defmodule KV.Server.Command do
       ["SUM", bucket] -> {:ok, {:sum, bucket}}
       ["AVG", bucket] -> {:ok, {:avg, bucket}}
       ["WORDCOUNT", bucket, key] -> {:ok, {:word_count, bucket, key}}
-      ["RESULT", id] -> {:ok, {:result, String.to_integer(id)}}
+      ["RESULT", id] -> {:ok, {:result, id}}
       ["BUCKETS"] -> {:ok, :buckets}
       _ -> {:error, :unknown_command}
     end
@@ -183,15 +183,21 @@ defmodule KV.Server.Command do
     end
   end
 
-  defp invoke({:result, id}) do
-    case KV.MapReduce.Scheduler.get_job_result(KV.MapReduce.Scheduler, id) do
-      :no_such_job ->
-        {:ok, "JOB NOT FOUND\r\n"}
+  defp invoke({:result, stringified_id}) do
+    case Integer.parse(stringified_id, 10) do
+      :error ->
+        {:ok, "INVALID JOB ID\r\n"}
 
-      result ->
-        text = transform_to_text(result)
-        {:ok, "#{text}\r\nOK\r\n"}
-    end
+      {id, _rest} ->
+        case KV.MapReduce.Scheduler.get_job_result(KV.MapReduce.Scheduler, id) do
+          :no_such_job ->
+            {:ok, "JOB NOT FOUND\r\n"}
+
+          result ->
+            text = transform_to_text(result)
+            {:ok, "#{text}\r\nOK\r\n"}
+        end
+      end
   end
 
   defp invoke(:buckets) do

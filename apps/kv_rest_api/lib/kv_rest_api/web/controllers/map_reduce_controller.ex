@@ -38,10 +38,15 @@ defmodule KV.RestAPI.Web.MapReduceController do
 
   def result(conn, %{"id" => id}) do
     case KV.RestAPI.Command.Server.execute(:result, [ id ]) do
-      nil ->
+      :not_found ->
         conn
         |> put_status(:not_found)
         |> render(KV.RestAPI.Web.ErrorView, "404.json")
+
+      :error ->
+        conn
+        |> put_status(500)
+        |> render(KV.RestAPI.Web.ErrorView, "500.json")
 
       result ->
         conn

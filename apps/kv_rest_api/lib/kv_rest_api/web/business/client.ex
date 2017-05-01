@@ -131,8 +131,9 @@ defmodule KV.RestAPI.Web.Client do
     response = command("RESULT #{id}") |> String.split("\r\n")
 
     case response do
-      [ "JOB NOT FOUND" ] -> nil
-      [ result | _tail ] -> result
+      [ "JOB NOT FOUND" ] -> :not_found
+      [ "INVALID JOB ID"] -> :error
+      [ result | _tail ]  -> result
     end
   end
 
