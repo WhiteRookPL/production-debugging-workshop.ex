@@ -39,7 +39,7 @@ defmodule KV.Router.Statistics do
     Enum.each(commands, fn(command) ->
       {:ok, parsed } = KV.Server.Command.parse(command)
 
-      KV.Router.route(elem(parsed, 1), KV.Server.Command, :execute, [ parsed ])
+      KV.Router.route(elem(parsed, 1), KV.Server.Command, :execute_without_persistence, [ parsed ])
     end)
 
     Logger.info "Restored #{length(commands)} commands from DB."
