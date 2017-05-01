@@ -20,7 +20,7 @@ environment :prod do
   set vm_args: "rel/vm.args"
 end
 
-release :ex_production_debugging_workshop do
+release :production_debugging_workshop_ex do
   set version: "1.0.0"
   set applications: [
     runtime_tools: :permanent,

@@ -42,7 +42,7 @@ production-debugging-workshop.ex $ git checkout FIX_1
 In order to see how it was solved just do a `git diff`:
 
 ```bash
-production-debugging-workshop.ex $ git diff BUG_1..FIX_!
+production-debugging-workshop.ex $ git diff BUG_1..FIX_1
 ```
 
 Explanation why and how to debug and narrow it down is inside [materials](#materials).
@@ -59,7 +59,7 @@ Feel free to use prepared helpers and scripts that will ease your pain when usin
 ## Materials
 
 If you were on one of editions mentioned [above](#editions) you should receive materials after the workshop in a dedicated email from us.
-Rest unfortunately will have to wait - *stay tuned*. :wink:
+Unfortunately rest of people will have to wait - *stay tuned*. :wink:
 
 ## Authors
 

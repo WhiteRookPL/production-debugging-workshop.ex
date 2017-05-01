@@ -18,6 +18,13 @@
 apps/kv_rest_api $ mix phx.routes
 ```
 
+### Application graph
+
+```bash
+~ $ mix app.tree --exclude logger --exclude elixir --exclude crypto --format dot
+~ $ dot -Tpng apps/kv_rest_api/app_tree.dot -o app_tree.png
+```
+
 ## Building release
 
 ```bash
