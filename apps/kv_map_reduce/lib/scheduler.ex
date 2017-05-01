@@ -74,14 +74,24 @@ defmodule KV.MapReduce.Scheduler do
   end
 
   def handle_call({:new_word_count_job, bucket, key_name}, _from, {jobs, refs, job_id}) do
-    {:ok, pid} = KV.MapReduce.WordCounter.start(self(), job_id, bucket, key_name)
+    keys = KV.Bucket.keys(bucket)
 
-    ref = Process.monitor(pid)
+    {response, updated_state} = case Enum.member?(keys, key_name) do
+      false ->
+        {:error, {jobs, refs, job_id}}
 
-    updated_refs = Map.put(refs, ref, job_id)
-    updated_jobs = Map.put(jobs, job_id, :in_progress)
+      true  ->
+        {:ok, pid} = KV.MapReduce.WordCounter.start(self(), job_id, bucket, key_name)
 
-    {:reply, {:ok, job_id}, {updated_jobs, updated_refs, job_id + 1}}
+        ref = Process.monitor(pid)
+
+        updated_refs = Map.put(refs, ref, job_id)
+        updated_jobs = Map.put(jobs, job_id, :in_progress)
+
+        {{:ok, job_id}, {updated_jobs, updated_refs, job_id + 1}}
+    end
+
+    {:reply, response, updated_state}
   end
 
   def handle_call({:get_job_result, job_id}, _from, {jobs, _refs, _seed} = state) do
