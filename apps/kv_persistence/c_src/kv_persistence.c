@@ -106,6 +106,8 @@ static ERL_NIF_TERM persist_command(ErlNifEnv *env, int argc, const ERL_NIF_TERM
   fflush(file);
   fclose(file);
 
+  enif_free(line);
+
   return enif_make_tuple2(env, enif_make_atom(env, "ok"), enif_make_int(env, lines));
 }
 
