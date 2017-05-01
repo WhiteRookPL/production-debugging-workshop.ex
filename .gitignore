@@ -1,0 +1,15 @@
+# Build files and dependencies:
+_build/
+deps/
+
+# Log files:
+log/
+
+# Crash dumps:
+erl_crash.dump
+
+# Packages:
+*.ez
+
+# Persistence files:
+*.db

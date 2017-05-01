@@ -1,0 +1,229 @@
+{
+  "createdAt": "2017-05-01T12:18:44.799Z",
+  "version": "9.14.64.305",
+  "kind": "ARC#AllDataExport",
+  "requests": [
+    {
+      "type": "saved",
+      "headers": "Content-Type: application/json",
+      "method": "POST",
+      "name": "/buckets/${BUCKET}/keys (TTL)",
+      "payload": "{ \"key\": \"${KEY}\", \"value\": \"${VALUE}\", \"ttl\": \"${TTL}\" }",
+      "url": "http://localhost:8080/buckets/${BUCKET}/keys",
+      "updated": 1493640942786,
+      "id": "%2Fbuckets%2F%24%7BBUCKET%7D%2Fkeys%20(TTL)/http%3A%2F%2Flocalhost%3A8080%2Fbuckets%2F%24%7BBUCKET%7D%2Fkeys/POST/9b413ff3-6fff-4849-8141-9dd204c3d80c",
+      "projectOrder": 5,
+      "_referenceLegacyProject": "9b413ff3-6fff-4849-8141-9dd204c3d80c",
+      "kind": "ARC#RequestData"
+    },
+    {
+      "type": "saved",
+      "headers": "",
+      "method": "DELETE",
+      "name": "/buckets/${BUCKET}/keys/${KEY}",
+      "payload": "",
+      "url": "http://localhost:8080/buckets/${BUCKET}/keys/${KEY}",
+      "updated": 1493640955209,
+      "id": "%2Fbuckets%2F%24%7BBUCKET%7D%2Fkeys%2F%24%7BKEY%7D/http%3A%2F%2Flocalhost%3A8080%2Fbuckets%2F%24%7BBUCKET%7D%2Fkeys%2F%24%7BKEY%7D/DELETE/9b413ff3-6fff-4849-8141-9dd204c3d80c",
+      "projectOrder": 7,
+      "_referenceLegacyProject": "9b413ff3-6fff-4849-8141-9dd204c3d80c",
+      "kind": "ARC#RequestData"
+    },
+    {
+      "type": "saved",
+      "headers": "Content-Type: application/json",
+      "method": "GET",
+      "name": "/buckets/${BUCKET}/keys/${KEY}",
+      "payload": "",
+      "url": "http://localhost:8080/buckets/${BUCKET}/keys/${KEY}",
+      "updated": 1493640955208,
+      "id": "%2Fbuckets%2F%24%7BBUCKET%7D%2Fkeys%2F%24%7BKEY%7D/http%3A%2F%2Flocalhost%3A8080%2Fbuckets%2F%24%7BBUCKET%7D%2Fkeys%2F%24%7BKEY%7D/GET/9b413ff3-6fff-4849-8141-9dd204c3d80c",
+      "selected": false,
+      "projectOrder": 6,
+      "_referenceLegacyProject": "9b413ff3-6fff-4849-8141-9dd204c3d80c",
+      "kind": "ARC#RequestData"
+    },
+    {
+      "type": "saved",
+      "headers": "Content-Type: application/json",
+      "method": "GET",
+      "name": "/buckets/${BUCKET}/keys",
+      "payload": "",
+      "url": "http://localhost:8080/buckets/${BUCKET}/keys",
+      "updated": 1493640942785,
+      "id": "%2Fbuckets%2F%24%7BBUCKET%7D%2Fkeys/http%3A%2F%2Flocalhost%3A8080%2Fbuckets%2F%24%7BBUCKET%7D%2Fkeys/GET/9b413ff3-6fff-4849-8141-9dd204c3d80c",
+      "selected": false,
+      "projectOrder": 2,
+      "_referenceLegacyProject": "9b413ff3-6fff-4849-8141-9dd204c3d80c",
+      "kind": "ARC#RequestData"
+    },
+    {
+      "type": "saved",
+      "headers": "Content-Type: application/json",
+      "method": "POST",
+      "name": "/buckets/${BUCKET}/keys",
+      "payload": "{ \"key\": \"${KEY}\", \"value\": \"${VALUE}\" }",
+      "url": "http://localhost:8080/buckets/${BUCKET}/keys",
+      "updated": 1493640942785,
+      "id": "%2Fbuckets%2F%24%7BBUCKET%7D%2Fkeys/http%3A%2F%2Flocalhost%3A8080%2Fbuckets%2F%24%7BBUCKET%7D%2Fkeys/POST/9b413ff3-6fff-4849-8141-9dd204c3d80c",
+      "projectOrder": 4,
+      "_referenceLegacyProject": "9b413ff3-6fff-4849-8141-9dd204c3d80c",
+      "kind": "ARC#RequestData"
+    },
+    {
+      "headers": "",
+      "id": "%2Fbuckets%2F%24%7BBUCKET%7D/http%3A%2F%2Flocalhost%3A8080%2Fbuckets%2F%24%7BBUCKET%7D/DELETE/9b413ff3-6fff-4849-8141-9dd204c3d80c",
+      "method": "DELETE",
+      "name": "/buckets/${BUCKET}",
+      "payload": "",
+      "projectOrder": 3,
+      "selected": false,
+      "type": "saved",
+      "updated": 1493640942785,
+      "url": "http://localhost:8080/buckets/${BUCKET}",
+      "_referenceLegacyProject": "9b413ff3-6fff-4849-8141-9dd204c3d80c",
+      "kind": "ARC#RequestData"
+    },
+    {
+      "headers": "Content-Type: application/json",
+      "method": "GET",
+      "payload": "",
+      "url": "http://localhost:8080/buckets",
+      "name": "/buckets",
+      "type": "saved",
+      "updated": 1493640944239,
+      "id": "%2Fbuckets/http%3A%2F%2Flocalhost%3A8080%2Fbuckets/GET/9b413ff3-6fff-4849-8141-9dd204c3d80c",
+      "selected": false,
+      "projectOrder": 0,
+      "_referenceLegacyProject": "9b413ff3-6fff-4849-8141-9dd204c3d80c",
+      "kind": "ARC#RequestData"
+    },
+    {
+      "headers": "Content-Type: application/json",
+      "id": "%2Fbuckets/http%3A%2F%2Flocalhost%3A8080%2Fbuckets/POST/9b413ff3-6fff-4849-8141-9dd204c3d80c",
+      "method": "POST",
+      "name": "/buckets",
+      "payload": "{ \"bucket\": \"${BUCKET}\" }",
+      "projectOrder": 1,
+      "type": "saved",
+      "updated": 1493640944239,
+      "url": "http://localhost:8080/buckets",
+      "_referenceLegacyProject": "9b413ff3-6fff-4849-8141-9dd204c3d80c",
+      "kind": "ARC#RequestData"
+    },
+    {
+      "headers": "Content-Type: application/json",
+      "method": "GET",
+      "name": "/debug/commands",
+      "payload": "",
+      "type": "saved",
+      "url": "http://localhost:8080/debug/commands",
+      "updated": 1493640879588,
+      "id": "%2Fdebug%2Fcommands/http%3A%2F%2Flocalhost%3A8080%2Fdebug%2Fcommands/GET/9b413ff3-6fff-4849-8141-9dd204c3d80c",
+      "selected": false,
+      "projectOrder": 12,
+      "_referenceLegacyProject": "9b413ff3-6fff-4849-8141-9dd204c3d80c",
+      "kind": "ARC#RequestData"
+    },
+    {
+      "type": "saved",
+      "headers": "Content-Type: application/json",
+      "method": "GET",
+      "name": "/jobs/${ID}",
+      "payload": "",
+      "url": "http://localhost:8080/jobs/${ID}",
+      "updated": 1493640879588,
+      "id": "%2Fjobs%2F%24%7BID%7D/http%3A%2F%2Flocalhost%3A8080%2Fjobs%2F%24%7BID%7D/GET/9b413ff3-6fff-4849-8141-9dd204c3d80c",
+      "selected": false,
+      "projectOrder": 11,
+      "_referenceLegacyProject": "9b413ff3-6fff-4849-8141-9dd204c3d80c",
+      "kind": "ARC#RequestData"
+    },
+    {
+      "type": "saved",
+      "headers": "",
+      "method": "POST",
+      "name": "/jobs/average/${BUCKET}",
+      "payload": "",
+      "url": "http://localhost:8080/jobs/average/${BUCKET}",
+      "updated": 1493640878435,
+      "id": "%2Fjobs%2Faverage%2F%24%7BBUCKET%7D/http%3A%2F%2Flocalhost%3A8080%2Fjobs%2Faverage%2F%24%7BBUCKET%7D/POST/9b413ff3-6fff-4849-8141-9dd204c3d80c",
+      "projectOrder": 8,
+      "_referenceLegacyProject": "9b413ff3-6fff-4849-8141-9dd204c3d80c",
+      "kind": "ARC#RequestData"
+    },
+    {
+      "type": "saved",
+      "headers": "",
+      "method": "POST",
+      "name": "/jobs/sum/${BUCKET}",
+      "payload": "",
+      "url": "http://localhost:8080/jobs/sum/${BUCKET}",
+      "updated": 1493640878436,
+      "id": "%2Fjobs%2Fsum%2F%24%7BBUCKET%7D/http%3A%2F%2Flocalhost%3A8080%2Fjobs%2Fsum%2F%24%7BBUCKET%7D/POST/9b413ff3-6fff-4849-8141-9dd204c3d80c",
+      "projectOrder": 9,
+      "_referenceLegacyProject": "9b413ff3-6fff-4849-8141-9dd204c3d80c",
+      "kind": "ARC#RequestData"
+    },
+    {
+      "type": "saved",
+      "headers": "",
+      "method": "POST",
+      "name": "/jobs/wordcount/${BUCKET}/${KEY}",
+      "payload": "",
+      "url": "http://localhost:8080/jobs/wordcount/${BUCKET}/${KEY}",
+      "updated": 1493640878436,
+      "id": "%2Fjobs%2Fwordcount%2F%24%7BBUCKET%7D%2F%24%7BKEY%7D/http%3A%2F%2Flocalhost%3A8080%2Fjobs%2Fwordcount%2F%24%7BBUCKET%7D%2F%24%7BKEY%7D/POST/9b413ff3-6fff-4849-8141-9dd204c3d80c",
+      "projectOrder": 10,
+      "_referenceLegacyProject": "9b413ff3-6fff-4849-8141-9dd204c3d80c",
+      "kind": "ARC#RequestData"
+    }
+  ],
+  "projects": [
+    {
+      "name": "production-debugging-workshop.ex",
+      "order": 0,
+      "created": 1493640181431,
+      "updated": 1493640181434,
+      "_referenceId": "9b413ff3-6fff-4849-8141-9dd204c3d80c",
+      "kind": "ARC#ProjectData"
+    }
+  ],
+  "variables": [
+    {
+      "environment": "default",
+      "enabled": true,
+      "variable": "TTL",
+      "value": "5000",
+      "kind": "ARC#Variable"
+    },
+    {
+      "environment": "default",
+      "enabled": true,
+      "variable": "BUCKET",
+      "value": "foo",
+      "kind": "ARC#Variable"
+    },
+    {
+      "environment": "default",
+      "enabled": true,
+      "variable": "ID",
+      "value": "1",
+      "kind": "ARC#Variable"
+    },
+    {
+      "environment": "default",
+      "enabled": true,
+      "variable": "KEY",
+      "value": "bar",
+      "kind": "ARC#Variable"
+    },
+    {
+      "environment": "default",
+      "enabled": true,
+      "variable": "VALUE",
+      "value": "test value",
+      "kind": "ARC#Variable"
+    }
+  ]
+}

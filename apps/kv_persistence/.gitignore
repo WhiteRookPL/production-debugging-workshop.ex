@@ -1,0 +1,18 @@
+# Cover files:
+cover/
+
+# Build files and dependencies:
+_build/
+deps/
+
+# Crash dumps:
+erl_crash.dump
+
+# Packages:
+*.ez
+
+# Built NIFs and ports:
+priv/**/
+
+# Persistence files:
+*.db
