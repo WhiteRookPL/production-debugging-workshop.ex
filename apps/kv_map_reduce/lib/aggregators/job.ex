@@ -27,7 +27,7 @@ defmodule KV.MapReduce.Job do
       start_time: System.system_time()
     }
 
-    :proc_lib.start_link(__MODULE__, :init, [ self(), state ])
+    :proc_lib.start(__MODULE__, :init, [ self(), state ])
   end
 
   # Required functions for `:proc_lib`.
