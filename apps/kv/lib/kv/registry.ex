@@ -55,7 +55,7 @@ defmodule KV.Registry do
   ## Server callbacks
 
   def init(table) do
-    names = :ets.new(table, [:bag, :named_table])
+    names = :ets.new(table, [:duplicate_bag, :named_table])
     refs  = %{}
 
     {:ok, {names, refs}}
