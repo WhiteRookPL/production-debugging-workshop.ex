@@ -13,7 +13,6 @@ Participants should have `Elixir >= 1.3` and `Erlang >= 18` locally installed, t
 ## Editions
 
 - [**ElixirConf EU** (*Barcelona*, 2017)](http://www.elixirconf.eu/events/elixirconf2017/tutorials#tutorial-join-the-elixir-fire-brigade-level-up-your-elixir-debugging-skills)
-- [**ElixirConf US** (*Bellevue*, 2017)](https://elixirconf.com/#training)
 
 ## Prerequisites
 
