@@ -38,10 +38,11 @@ If you want to check how it was fixed, move to the corresponding tag with a *fix
 production-debugging-workshop.ex $ git checkout FIX_1
 ```
 
-In order to see how it was solved just do a `git diff`:
+In order to see how it was solved just type one of those commands:
 
 ```bash
 production-debugging-workshop.ex $ git diff BUG_1..FIX_1
+production-debugging-workshop.ex $ git show FIX_1
 ```
 
 Explanation why and how to debug and narrow it down is inside [materials](#materials).
